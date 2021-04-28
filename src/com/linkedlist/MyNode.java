@@ -1,39 +1,99 @@
 package com.linkedlist;
-/*
- *@Description:-adding three elements to linled list
- * inserting node between two node
- * Deleting First Node
- * Deleting last Node
- */
-public class MyNode<k> implements INode<k> {
-    private  k key;
-    private MyNode<k> next;
+public class MyLinkedList {
 
-    public MyNode(k key) {
-        this.key = key;
-        this.next = null;
+    public INode head;
+    public INode tail;
+
+    public MyLinkedList() {
+        this.head = null;
+        this.tail = null;
     }
 
-    @Override
-    public k getKey() {
-        return key;
+    //adding node in a linked list
+    public void add(INode myNode) {
+        if (this.tail == null) {
+            this.tail = myNode;
+        }
+        if (this.head == null) {
+            this.head = myNode;
+        } else {
+            INode tempNode = this.head;
+            this.head = myNode;
+            this.head.setNext(tempNode);
+        }
     }
 
-    @Override
-    public void setKey(k key) {
-        this.key = key;
+    //appending elements
+    public void append(INode myNode) {
+        if (this.tail == null) {
+            this.tail = myNode;
+        }
+        if (this.head == null) {
+            this.head = myNode;
+        } else {
+            this.tail.setNext(myNode);
+            this.tail = myNode;
+        }
     }
 
-    public INode getNext() {
-        return next;
+    //inserting node between two elements
+    public void insert(INode myNode, INode newNode) {
+        INode tempNode = myNode.getNext();
+        myNode.setNext(newNode);
+        newNode.setNext(tempNode);
     }
 
-    @Override
-    public void setKey(INode next) {
-
+    //deleting first element
+    public INode pop() {
+        INode tempNode = this.head;
+        this.head = head.getNext();
+        return tempNode;
     }
 
-    public void setNext(INode next) {
-        this.next = (MyNode<k>) next;
+    //deleting last element
+    public INode popLast() {
+        INode tempNode = head;
+        while (!tempNode.getNext().equals((tail))){
+            tempNode = tempNode.getNext();
+        }
+        this.tail = tempNode;
+        tempNode = tempNode.getNext();
+        return tempNode;
     }
-}
+
+    //to search node
+    public boolean searchElement(INode serchNode){
+        INode tempNode = this.head;
+        while (tempNode != null){
+            if (tempNode.getKey().equals(serchNode.getKey())){
+                return true;
+            }
+            tempNode = tempNode.getNext();
+        }
+        return false;
+    }
+
+    //to get size
+    public Integer size(){
+        Integer size = 0;
+        INode tempNode = this.head;
+        while(tempNode != null){
+            size++;
+            tempNode = tempNode.getNext();
+        }
+        return size;
+    }
+
+
+    //printing nodes
+    public void printMyNodes() {
+        StringBuffer myNodes = new StringBuffer("My Nodes: ");
+        INode tempNode = head;
+        while (tempNode.getNext() != null) {
+            myNodes.append(tempNode.getKey());
+            if (!tempNode.equals(tail)) myNodes.append("->");
+            tempNode = tempNode.getNext();
+        }
+        myNodes.append(tempNode.getKey());
+        System.out.println(myNodes);
+    }
