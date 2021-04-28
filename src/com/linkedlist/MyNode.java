@@ -3,6 +3,7 @@ package com.linkedlist;
  *@Description:-adding three elements to linled list
  * inserting node between two node
  * Deleting First Node
+ * Deleting last Node
  */
 public class MyNode<k> implements INode<k> {
     private  k key;
