@@ -1,54 +1,38 @@
 package com.linkedlist;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+/*
+ *@Description:-adding three elements to linled list
+ * inserting node between two node
+ * Deleting First Node
+ */
+public class MyNode<k> implements INode<k> {
+    private  k key;
+    private MyNode<k> next;
 
-public class MyLinkedList {
-
-    @Test
-    public void given3NumbersWhenAddedToLinkedListShouldBeAddedToTop() {
-        MyNode<Integer> myFirstNode = new MyNode<>(70);
-        MyNode<Integer> mySecondNode = new MyNode<>(30);
-        MyNode<Integer> myThirdNode = new MyNode<>(56);
-        MyLinkedList myLinkedList = new MyLinkedList();
-        myLinkedList.add(myFirstNode);
-        myLinkedList.add(mySecondNode);
-        myLinkedList.add(myThirdNode);
-        myLinkedList.printMyNodes();
-        boolean result = myLinkedList.head.equals(myThirdNode) &&
-                myLinkedList.head.getNext().equals(mySecondNode) &&
-                myLinkedList.tail.equals(myFirstNode);
-        Assertions.assertTrue(result);
+    public MyNode(k key) {
+        this.key = key;
+        this.next = null;
     }
 
-    @Test
-    public void given3NumbersWhenAppendingShouldBeAddedToLast() {
-        MyNode<Integer> myFirstNode = new MyNode<>(56);
-        MyNode<Integer> mySecondNode = new MyNode<>(30);
-        MyNode<Integer> myThirdNode = new MyNode<>(70);
-        MyLinkedList myLinkedList = new MyLinkedList();
-        myLinkedList.add(myFirstNode);
-        myLinkedList.append(mySecondNode);
-        myLinkedList.append(myThirdNode);
-        myLinkedList.printMyNodes();
-        boolean result = myLinkedList.head.equals(myFirstNode) &&
-                myLinkedList.head.getNext().equals(mySecondNode) &&
-                myLinkedList.tail.equals(myThirdNode);
-        Assertions.assertTrue(result);
+    @Override
+    public k getKey() {
+        return key;
     }
 
-    @Test
-    public void given3NumbersWhenInsertingSecondInBetweenShouldPassedLinkedListResult() {
-        MyNode<Integer> myFirstNode = new MyNode<>(56);
-        MyNode<Integer> mySecondNode = new MyNode<>(30);
-        MyNode<Integer> myThirdNode = new MyNode<>(70);
-        MyLinkedList myLinkedList = new MyLinkedList();
-        myLinkedList.add(myFirstNode);
-        myLinkedList.append(myThirdNode);
-        myLinkedList.insert(myFirstNode, mySecondNode);
-        myLinkedList.printMyNodes();
-        boolean result = myLinkedList.head.equals(myFirstNode) &&
-                myLinkedList.head.getNext().equals(mySecondNode) &&
-                myLinkedList.tail.equals(myThirdNode);
-        Assertions.assertTrue(result);
+    @Override
+    public void setKey(k key) {
+        this.key = key;
+    }
+
+    public INode getNext() {
+        return next;
+    }
+
+    @Override
+    public void setKey(INode next) {
+
+    }
+
+    public void setNext(INode next) {
+        this.next = (MyNode<k>) next;
     }
 }
